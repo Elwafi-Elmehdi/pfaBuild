@@ -5167,7 +5167,6 @@
             name: 'Corporate'
           }];
           this.currentTheme = 'default';
-          this.token = null;
           this.userMenu = [{
             title: 'Profile'
           }, {
@@ -8480,10 +8479,12 @@
           value: function login(user) {
             var _this34 = this;
 
-            this.http.post(this.url + '/token/', user).subscribe(function (res) {
+            this.http.post(this.url + 'token/', user).subscribe(function (res) {
               _this34.setLocalStorage(res);
 
-              _this34.router.navigate(['pages/iot-dashboard']);
+              _this34.router.navigate(['pages/iot-dashboard']).then(function () {
+                window.location.reload();
+              });
             });
           }
         }, {

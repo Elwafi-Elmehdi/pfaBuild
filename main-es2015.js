@@ -2854,7 +2854,6 @@ class HeaderComponent {
             },
         ];
         this.currentTheme = 'default';
-        this.token = null;
         this.userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
         this.token = localStorage.getItem('access_token');
     }
@@ -4981,9 +4980,11 @@ class AuthService {
         this.user = new _models_user__WEBPACK_IMPORTED_MODULE_1__.User();
     }
     login(user) {
-        this.http.post(this.url + '/token/', user).subscribe(res => {
+        this.http.post(this.url + 'token/', user).subscribe(res => {
             this.setLocalStorage(res);
-            this.router.navigate(['pages/iot-dashboard']);
+            this.router.navigate(['pages/iot-dashboard']).then(() => {
+                window.location.reload();
+            });
         });
     }
     logout() {
